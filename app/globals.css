@@ -1,0 +1,347 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "./animations.css";
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.93rem; /* Reduced from default 1rem (16px) to about 15px */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.3s ease-out;
+}
+
+/* Page Transition Animations */
+@keyframes pageFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition-wrapper {
+  width: 100%;
+  min-height: 100%;
+}
+
+.page-fade-out {
+  animation: pageFadeOut 0.15s ease-in forwards;
+}
+
+.page-fade-in {
+  animation: pageFadeIn 0.25s ease-out forwards;
+}
+
+/* Smooth page transitions for Next.js */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth navigation transitions */
+main {
+  animation: pageFadeIn 0.25s ease-out forwards;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --sidebar-bg: 0 0% 100%;
+    --sidebar-fg: 0 0% 3.9%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-active-bg: 0 0% 96.1%;
+    --sidebar-active-fg: 0 0% 9%;
+    --sidebar-hover-bg: 0 0% 96.1%;
+    --sidebar-hover-fg: 0 0% 9%;
+
+    --apple-blue: 206 100% 50%;
+    --apple-purple: 264 88% 74%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15.9%;
+    --muted-foreground: 0 0% 64.9%;
+    --accent: 0 0% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15.9%;
+    --input: 0 0% 15.9%;
+    --ring: 0 0% 83.1%;
+
+    --sidebar-bg: 0 0% 3.9%;
+    --sidebar-fg: 0 0% 98%;
+    --sidebar-border: 0 0% 15.9%;
+    --sidebar-active-bg: 0 0% 15.9%;
+    --sidebar-active-fg: 0 0% 98%;
+    --sidebar-hover-bg: 0 0% 15.9%;
+    --sidebar-hover-fg: 0 0% 98%;
+
+    --apple-blue: 206 100% 50%;
+    --apple-purple: 264 88% 74%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Theme-aware card styles */
+  .theme-card {
+    @apply bg-card border border-border rounded-xl shadow-sm;
+  }
+
+  .theme-card-hover {
+    @apply transition-all duration-200 hover:shadow-md;
+  }
+
+  /* Theme-aware button styles */
+  .theme-button {
+    @apply rounded-lg font-medium transition-all duration-200;
+  }
+
+  .theme-button-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .theme-button-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .theme-button-accent {
+    background-color: hsl(var(--apple-blue));
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition-property: all;
+    transition-duration: 200ms;
+  }
+
+  .theme-button-accent:hover {
+    background-color: hsl(var(--apple-blue) / 0.9);
+  }
+
+  /* Theme-aware input styles */
+  .theme-input {
+    @apply bg-background border border-input rounded-lg py-2 px-3 text-foreground focus:outline-none focus:ring-1 focus:ring-ring;
+  }
+
+  /* Theme-aware table styles */
+  .theme-table-header {
+    @apply bg-muted border-b border-border;
+  }
+
+  .theme-table-row {
+    @apply border-b border-border hover:bg-muted/50 transition-colors;
+  }
+
+  /* Theme-aware modal styles */
+  .theme-modal-overlay {
+    @apply bg-black/50 dark:bg-black/70 backdrop-blur-sm;
+  }
+
+  .theme-modal-content {
+    @apply bg-card border border-border rounded-xl shadow-lg;
+  }
+}
+
+/* Apple-inspired card styles */
+.apple-card {
+  @apply bg-card border border-border rounded-xl shadow-sm;
+}
+
+.apple-card-hover {
+  @apply transition-all duration-200 hover:shadow-md;
+}
+
+/* Apple-inspired button styles */
+.apple-button {
+  @apply rounded-lg font-medium transition-all duration-200;
+}
+
+.apple-button-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.apple-button-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+}
+
+.apple-button-accent {
+  background-color: hsl(var(--apple-blue));
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition-property: all;
+  transition-duration: 200ms;
+}
+
+.apple-button-accent:hover {
+  background-color: hsl(var(--apple-blue) / 0.9);
+}
+
+/* Adjust spacing for common components */
+.p-6 {
+  padding: 1.4rem; /* Slightly reduced from 1.5rem */
+}
+
+.gap-4 {
+  gap: 0.95rem; /* Slightly reduced from 1rem */
+}
+
+/* Adjust text sizes */
+.text-2xl {
+  font-size: 1.4rem; /* Reduced from 1.5rem */
+}
+
+.text-xl {
+  font-size: 1.15rem; /* Reduced from 1.25rem */
+}
+
+.text-lg {
+  font-size: 1.05rem; /* Reduced from 1.125rem */
+}
+
+/* Adjust icon sizes */
+.w-10,
+.h-10 {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.w-8,
+.h-8 {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.w-6,
+.h-6 {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.w-5,
+.h-5 {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.w-4,
+.h-4 {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+/* Custom scrollbar for the area code list */
+.max-h-48::-webkit-scrollbar {
+  width: 6px;
+}
+
+.max-h-48::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.max-h-48::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.max-h-48::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Light mode scrollbar */
+.light .max-h-48::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.light .max-h-48::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.light .max-h-48::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
